@@ -91,8 +91,6 @@ Meditation Centre</p>
 
             const carousel = document.getElementById("carousel");
             const classname = "md:opacity-5"
-            const nodes = Array.from(carousel.childNodes).filter(c => c.nodeType != 3)
-            
             carousel1.classList.toggle(classname);
 
             function ensure(item, dimmed) {
@@ -104,22 +102,28 @@ Meditation Centre</p>
             }
 
             function ensureAllDimmed(except) {
-                nodes.forEach((c, j) => {
+                var j = 0;
+                carousel.childNodes.forEach(c => {
                     if (c.nodeType != 3 && except != j) {
                         ensure(c, dimmed=true)
                     }
+                    if (c.nodeType != 3) {j++}
                 })
             }
 
-            nodes.forEach((c, i) => {
+            let i = 0;
+            carousel.childNodes.forEach(c => {
                 if(c.nodeType != 3) {
                     c.addEventListener("mouseover", () => {
                         if (screenWidth >= 768) {
                             ensureAllDimmed(except=i);
-                            carousel.style.transform = `translate(-${carousel.scrollWidth*i/nodes.length}px, 0px)`
+                            console.log(carousel.scrollWidth*i/5);
+                            console.log(i);
+                            carousel.style.transform = `translate(-${carousel.scrollWidth/5}px, 0px)`
                             ensure(c, dimmed=false);
                         }
                     })
+                    i++;
                 }
             })
         </script>

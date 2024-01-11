@@ -116,7 +116,9 @@ Meditation Centre</p>
                     c.addEventListener("mouseover", () => {
                         if (screenWidth >= 768) {
                             ensureAllDimmed(except=i);
-                            carousel.style.transform = `translate(-${carousel.scrollWidth*i/nodes.length}px, 0px)`
+                            console.log(carousel.scrollWidth*i/carousel.childNodes.length);
+                            console.log(i);
+                            carousel.style.transform = `translate(-${carousel.scrollWidth*i/carousel.childNodes.length}px, 0px)`
                             ensure(c, dimmed=false);
                         }
                     })
