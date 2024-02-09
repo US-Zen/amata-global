@@ -1,0 +1,117 @@
+{% extends "src/views/layout.html" %}
+
+{% set title="Amata" %}
+
+{% block content %}
+<div class="carousel duration-500 ease-in-out flex flex-row max-h-[850px] max-w-full overflow-x-scroll pb-16 pl-5 pr-10 pt-5 transition md:overflow-x-visible"
+    id="carousel" data-pgc-optional="carousel">
+    <div id="carousel1"
+        class="cursor-pointer duration-300 ease-in-out flex flex-col flex-grow hover:opacity-100 min-w-full transition md:duration-500 md:opacity-5"
+        data-pgc="carousel-item">
+        <div class="flex-grow m-2 overflow-hidden pt-0 rounded-3xl">
+            <img class="aspect-auto min-h-full object-center object-cover" src="../images/hsiuying 1.jpg"
+                data-pgc-field="Hero Image">
+        </div>
+        <div class="m-3">
+            <p class="font-semibold font-serif mb-3 text-2xl" data-pgc-field="Title">Amata Meditation Center</p>
+            <p class="font-serif text-xl" data-pgc-field="Location 1">Boyds, Maryland</p>
+            <p class="font-serif italic text-xl" data-pgc-field="Location 2">USA</p>
+        </div>
+    </div>
+    <div id="carousel2"
+        class="cursor-pointer duration-300 ease-in-out flex flex-col flex-grow hover:opacity-100 min-w-full transition md:duration-500 md:opacity-5"
+        data-pgc="carousel-item">
+        <div class="flex-grow m-2 overflow-hidden pt-0 rounded-3xl">
+            <img class="aspect-auto min-h-full object-center object-cover" src="../images/uszen_exterior_day.jpg"
+                data-pgc-field="Hero Image">
+        </div>
+        <div class="m-3">
+            <p class="font-semibold font-serif mb-3 text-2xl" data-pgc-field="Title">US Zen Institute</p>
+            <p class="font-serif text-xl" data-pgc-field="Location 1">Germantown, Maryland</p>
+            <p class="font-serif italic text-xl" data-pgc-field="Location 2">USA</p>
+        </div>
+    </div>
+    <div id="carousel3"
+        class="cursor-pointer duration-300 ease-in-out flex flex-col flex-grow hover:opacity-100 min-w-full transition md:duration-500 md:opacity-5"
+        data-pgc="carousel-item">
+        <div class="flex-grow m-2 overflow-hidden pt-0 rounded-3xl">
+            <img class="aspect-auto min-h-full object-center object-cover"
+                src="../images/ed3fca_bff95a3760314a24a0dce6b75f44a29e~mv2_d_4730_2660_s_4_2.jpg"
+                data-pgc-field="Hero Image">
+        </div>
+        <div class="m-3">
+            <p class="font-semibold font-serif mb-3 text-2xl" data-pgc-field="Title">Mount Kinabalu
+                Meditation Centre</p>
+            <p class="font-serif text-xl" data-pgc-field="Location 1">Mount Kinabalu, Sabah</p>
+            <p class="font-serif italic text-xl" data-pgc-field="Location 2">Malaysia</p>
+        </div>
+    </div>
+    <div id="carousel4"
+        class="cursor-pointer duration-300 ease-in-out flex flex-col flex-grow hover:opacity-100 min-w-full transition md:duration-500 md:opacity-5"
+        data-pgc-define="carousel-item" data-pgc-define-name="Carousel Item">
+        <div class="flex-grow m-2 overflow-hidden pt-0 rounded-3xl">
+            <img class="aspect-auto min-h-full object-center object-cover" src="../images/20230211_p_20.jpg"
+                data-pgc-edit="Hero Image[src]">
+        </div>
+        <div class="m-3">
+            <p class="font-semibold font-serif mb-3 text-2xl" data-pgc-edit="Title">中華習禪會</p>
+            <p class="font-serif text-xl" data-pgc-edit="Location 1">Zhongpu, Chiayi</p>
+            <p class="font-serif italic text-xl" data-pgc-edit="Location 2">Taiwan</p>
+        </div>
+    </div>
+    <div id="carousel5"
+        class="cursor-pointer duration-300 ease-in-out flex flex-col flex-grow hover:opacity-100 min-w-full transition md:duration-500 md:opacity-5"
+        data-pgc="carousel-item">
+        <div class="flex-grow m-2 overflow-hidden pt-0 rounded-3xl">
+            <img class="aspect-auto min-h-full object-center object-cover"
+                src="../images/Looking_over_towards_Zhangshuhu (1).jpg" data-pgc-field="Hero Image">
+        </div>
+        <div class="m-3">
+            <p class="font-semibold font-serif mb-3 text-2xl" data-pgc-field="Title">聖默禪院&nbsp;&nbsp;</p>
+            <p class="font-serif text-xl" data-pgc-field="Location 1">Meishan Mountain</p>
+            <p class="font-serif italic text-xl" data-pgc-field="Location 2">Taiwan</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+    const screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+
+    const carousel = document.getElementById("carousel");
+    const classname = "md:opacity-5"
+    const nodes = Array.from(carousel.childNodes).filter(c => c.nodeType != 3)
+
+    carousel1.classList.toggle(classname);
+
+    function ensure(item, dimmed) {
+        if (dimmed && !item.classList.contains(classname)) {
+            item.classList.toggle(classname)
+        } else if (!dimmed && item.classList.contains(classname)) {
+            item.classList.toggle(classname)
+        }
+    }
+
+    function ensureAllDimmed(except) {
+        nodes.forEach((c, j) => {
+            if (c.nodeType != 3 && except != j) {
+                ensure(c, dimmed = true)
+            }
+        })
+    }
+
+    nodes.forEach((c, i) => {
+        if (c.nodeType != 3) {
+            c.addEventListener("mouseover", () => {
+                if (screenWidth >= 768) {
+                    ensureAllDimmed(except = i);
+                    carousel.style.transform = `translate(-${carousel.scrollWidth * i / nodes.length}px, 0px)`
+                    ensure(c, dimmed = false);
+                }
+            })
+        }
+    })
+</script>
+{% endblock %}
