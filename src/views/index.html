@@ -4,30 +4,10 @@
 
 {% macro carouselItem(index, imageLink, siteLink, nameChinese, nameEnglish, location1, location2) %}
 <div id="carousel{{ index }}"
-    class="duration-300 ease-in-out flex flex-col flex-grow min-w-full transition md:duration-500 md:opacity-5"
-    data-index="{{ index }}">
+    class="cursor-pointer duration-300 ease-in-out flex flex-col flex-grow hover:opacity-100 min-w-full transition md:duration-500 md:opacity-5"
+    data-link="{{ siteLink }}">
     <div class="flex-grow m-2 overflow-hidden pt-0 rounded-3xl">
-        <div class="relative h-full w-full">
-            <img class="aspect-auto min-h-full object-center object-cover" src="{{ imageLink }}">
-            <div id="previous{{ index }}" class="absolute top-0 left-0 flex h-full items-center justify-center px-4 focus:outline-none">
-                <button class="group" type="button" aria-label="Previous slide" onclick="handleClickPrevious(this)">
-                    <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/30 group-hover:bg-white/50 group-focus:outline-none group-focus:ring-4 group-focus:ring-white dark:bg-gray-800/30 dark:group-hover:bg-gray-800/60 dark:group-focus:ring-gray-800/70 sm:h-10 sm:w-10">
-                        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" class="h-5 w-5 text-white dark:text-gray-800 sm:h-6 sm:w-6" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path>
-                        </svg>
-                    </span>
-                </button>
-            </div>
-            <div id="next{{ index }}" class="absolute top-0 right-0 flex h-full items-center justify-center px-4 focus:outline-none">
-                <button class="group" type="button" aria-label="Next slide" onclick="handleClickNext(this)">
-                    <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/30 group-hover:bg-white/50 group-focus:outline-none group-focus:ring-4 group-focus:ring-white dark:bg-gray-800/30 dark:group-hover:bg-gray-800/60 dark:group-focus:ring-gray-800/70 sm:h-10 sm:w-10">
-                        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" class="h-5 w-5 text-white dark:text-gray-800 sm:h-6 sm:w-6" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                    </span>
-                </button>
-            </div>
-        </div>
+        <img class="aspect-auto min-h-full object-center object-cover" src="{{ imageLink }}">
     </div>
     <div class="m-3">
         <a class="hover:underline font-semibold font-serif mb-3 text-2xl" href="{{ siteLink }}">{{ nameChinese }}<br/>{{ nameEnglish }}</a>
@@ -67,30 +47,6 @@
     const nodes = Array.from(carousel.childNodes).filter(c => c.nodeType != 3)
 
     carousel1.classList.toggle(classname);
-    previous1.classList.add("invisible");
-    document.getElementById(`next${nodes.length}`).classList.add("invisible");
-
-    function handleClickPrevious(target) {
-        const index = getIndex(target);
-        ensureAllDimmed(except = (index-2));
-        carousel.style.transform = `translate(-${carousel.scrollWidth * (index-2) / nodes.length}px, 0px)`;
-        ensure(document.getElementById(`carousel${index-1}`), dimmed = false);
-    }
-
-    function handleClickNext(target) {
-        const index = getIndex(target);
-        ensureAllDimmed(except = (index+1));
-        carousel.style.transform = `translate(-${carousel.scrollWidth * index / nodes.length}px, 0px)`;
-        ensure(document.getElementById(`carousel${index+1}`), dimmed = false);
-    }
-
-    function getIndex(target) {
-        let cur = target;
-        while (!cur.hasAttribute("data-index")) {
-            cur = cur.parentNode;
-        }
-        return Number(cur.getAttribute("data-index"));
-    }
 
     function ensure(item, dimmed) {
         if (dimmed && !item.classList.contains(classname)) {
@@ -116,6 +72,14 @@
                     carousel.style.transform = `translate(-${carousel.scrollWidth * i / nodes.length}px, 0px)`
                     ensure(c, dimmed = false);
                 }
+            })
+            c.addEventListener("click", (e) => {
+                let cur = e.target;
+                while (!cur.hasAttribute("data-link")) {
+                    cur = cur.parentNode;
+                }
+                const link = cur.getAttribute("data-link");
+                window.location.href = link;
             })
         }
     })
