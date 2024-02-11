@@ -17,8 +17,8 @@ module.exports = {
     new HtmlBundlerPlugin({
       entry: {
         index: 'src/views/index.html',
-        mission: 'src/views/mission.html',
-        abbot: 'src/views/abbot.html'
+        about: 'src/views/about.html',
+        dhammadipa: 'src/views/dhammadipa.html'
       },
       js: {
         // output filename of compiled JavaScript
