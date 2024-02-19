@@ -18,7 +18,8 @@ module.exports = {
       entry: {
         index: 'src/views/index.html',
         about: 'src/views/about.html',
-        dhammadipa: 'src/views/dhammadipa.html'
+        dhammadipa: 'src/views/dhammadipa.html',
+        contact: 'src/views/contact.html',
       },
       js: {
         // output filename of compiled JavaScript
