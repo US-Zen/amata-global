@@ -4,25 +4,25 @@
 
 {% macro carouselItem(index, imageLink, siteLink, nameChinese, nameEnglish, location1, location2) %}
 <div id="slide{{ index }}" class="carousel-item relative flex flex-col w-full">
-    <div class="flex-grow m-2 overflow-hidden pt-0 rounded-3xl">
+    <div class="flex-grow m-2 overflow-hidden pt-0 rounded-3xl mx-5">
         <div class="relative h-full w-full">
-            <img class="aspect-auto min-h-full object-center object-cover" src="{{ imageLink }}">
-            <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                <a id="prev-link-{{ index }}" href="#slide{{ index - 1 }}" class="btn btn-circle">❮</a>
-                <a id="next-link-{{ index }}" href="#slide{{ index + 1 }}" class="btn btn-circle">❯</a>
+            <div class="absolute flex justify-between transform left-5 right-5 pb-5 bottom-0">
+                <a id="prev-link-{{ index }}" href="#slide{{ index - 1 }}" class="btn btn-circle bg-light hover:bg-light border-0 shadow-xl text-dark text-lg">🡐</a>
+                <a id="next-link-{{ index }}" href="#slide{{ index + 1 }}" class="btn btn-circle bg-light hover:bg-light border-0 shadow-xl text-dark text-lg">🡒</a>
             </div>
+            <img class="aspect-auto min-h-full object-center object-cover" src="{{ imageLink }}">
         </div>
     </div>
-    <div class="m-3">
-        <a class="hover:underline font-semibold font-serif mb-3 text-2xl" href="{{ siteLink }}">{{ nameChinese }}<br />{{ nameEnglish }}</a>
-        <p class="font-serif text-xl">{{ location1 }}</p>
-        <p class="font-serif italic text-xl">{{ location2 }}</p>
+    <div class="m-3 mx-5">
+        <a class="hover:underline font-semibold font-serif mb-3 text-2xl text-dark" href="{{ siteLink }}">{{ nameChinese }}<br />{{ nameEnglish }}</a>
+        <p class="font-serif text-xl text-dark">{{ location1 }}</p>
+        <p class="font-serif italic text-xl text-dark">{{ location2 }}</p>
     </div>
 </div>
 {% endmacro %}
 
 {% block content %}
-<div id="carousel" class="carousel max-h-[850px] w-full">
+<div id="carousel" class="carousel max-h-[850px] w-full py-5">
     {{
         carouselItem(1, '../images/hsiuying 1.jpg', 'https://amatavihara.org', '醍醐寺', 'Amata Meditation Center', 'Boyds, Maryland', 'USA')
     }}
