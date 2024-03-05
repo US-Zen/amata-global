@@ -3,22 +3,35 @@
 {% set title="Amata" %}
 
 {% macro carouselItem(index, imageLink, siteLink, nameChinese, nameEnglish, location1, location2) %}
-<div id="carousel{{ index }}"
-    class="cursor-pointer duration-300 ease-in-out flex flex-col flex-grow hover:opacity-100 min-w-full transition md:duration-500 md:opacity-5"
-    data-link="{{ siteLink }}">
-    <div class="flex-grow m-2 overflow-hidden pt-0 rounded-3xl">
-        <img class="aspect-auto min-h-full object-center object-cover" src="{{ imageLink }}">
+<div id="slide{{ index }}" class="carousel-item relative flex flex-col w-full">
+    <div class="flex-grow m-2 overflow-hidden pt-0 rounded-3xl mx-5">
+        <div class="relative h-full w-full">
+            <div class="absolute flex justify-between transform left-5 right-5 pb-5 bottom-0">
+                <a id="prev-link-{{ index }}" href="#slide{{ index - 1 }}" class="btn btn-circle bg-light hover:bg-light border-0 shadow-xl text-dark text-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
+                    </svg>
+                </a>
+                <a id="next-link-{{ index }}" href="#slide{{ index + 1 }}"
+                    class="btn btn-circle bg-light hover:bg-light border-0 shadow-xl text-dark text-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
+                    </svg>
+                </a>
+            </div>
+            <img class="aspect-auto min-h-full object-center object-cover" src="{{ imageLink }}">
+        </div>
     </div>
-    <div class="m-3">
-        <a class="hover:underline font-semibold font-serif mb-3 text-2xl" href="{{ siteLink }}">{{ nameChinese }}<br/>{{ nameEnglish }}</a>
-        <p class="font-serif text-xl">{{ location1 }}</p>
-        <p class="font-serif italic text-xl">{{ location2 }}</p>
+    <div class="m-3 mx-5">
+        <a class="hover:underline font-semibold font-serif mb-3 text-2xl text-dark" href="{{ siteLink }}">{{ nameChinese }}<br />{{ nameEnglish }}</a>
+        <p class="font-serif text-xl text-dark">{{ location1 }}</p>
+        <p class="font-serif italic text-xl text-dark">{{ location2 }}</p>
     </div>
 </div>
 {% endmacro %}
 
 {% block content %}
-<div class="carousel duration-500 ease-in-out flex flex-row max-h-[850px] max-w-full overflow-x-scroll pb-16 pl-5 pr-10 pt-5 transition md:overflow-x-visible" id="carousel">
+<div id="carousel" class="carousel max-h-[850px] w-full py-5">
     {{
         carouselItem(1, '../images/hsiuying 1.jpg', 'https://amatavihara.org', '醍醐寺', 'Amata Meditation Center', 'Boyds, Maryland', 'USA')
     }}
@@ -37,51 +50,10 @@
 </div>
 {% endblock %}
 
-
 {% block scripts %}
 <script>
-    const screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-
-    const carousel = document.getElementById("carousel");
-    const classname = "md:opacity-5"
     const nodes = Array.from(carousel.childNodes).filter(c => c.nodeType != 3)
-
-    carousel1.classList.toggle(classname);
-
-    function ensure(item, dimmed) {
-        if (dimmed && !item.classList.contains(classname)) {
-            item.classList.toggle(classname)
-        } else if (!dimmed && item.classList.contains(classname)) {
-            item.classList.toggle(classname)
-        }
-    }
-
-    function ensureAllDimmed(except) {
-        nodes.forEach((c, j) => {
-            if (c.nodeType != 3 && except != j) {
-                ensure(c, dimmed = true)
-            }
-        })
-    }
-
-    nodes.forEach((c, i) => {
-        if (c.nodeType != 3) {
-            c.addEventListener("mouseover", () => {
-                if (screenWidth >= 768) {
-                    ensureAllDimmed(except = i);
-                    carousel.style.transform = `translate(-${carousel.scrollWidth * i / nodes.length}px, 0px)`
-                    ensure(c, dimmed = false);
-                }
-            })
-            c.addEventListener("click", (e) => {
-                let cur = e.target;
-                while (!cur.hasAttribute("data-link")) {
-                    cur = cur.parentNode;
-                }
-                const link = cur.getAttribute("data-link");
-                window.location.href = link;
-            })
-        }
-    })
+    document.getElementById("prev-link-1").href = `#slide${nodes.length}`
+    document.getElementById(`next-link-${nodes.length}`).href = '#slide1'
 </script>
 {% endblock %}
