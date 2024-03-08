@@ -7,23 +7,26 @@
     <div class="flex-grow m-2 overflow-hidden pt-0 rounded-3xl mx-5">
         <div class="relative h-full w-full">
             <div class="absolute flex justify-between transform left-5 right-5 pb-5 bottom-0">
-                <a id="prev-link-{{ index }}" href="#slide{{ index - 1 }}" class="btn btn-circle bg-light hover:bg-light border-0 shadow-xl text-dark text-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
-                    </svg>
+                <a id="prev-link-{{ index }}" href="#slide{{ index - 1 }}" class="btn btn-circle bg-gray hover:bg-light border-0 shadow-2xl text-dark text-lg">
+		    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-6 h-6"> <path fill-rule="evenodd" d="M14 8a.75.75 0 0 1-.75.75H4.56l3.22 3.22a.75.75 0 1 1-1.06 1.06l-4.5-4.5a.75.75 0 0 1 0-1.06l4.5-4.5a.75.75 0 0 1 1.06 1.06L4.56 7.25h8.69A.75.75 0 0 1 14 8Z" clip-rule="evenodd" /> </svg>
                 </a>
                 <a id="next-link-{{ index }}" href="#slide{{ index + 1 }}"
-                    class="btn btn-circle bg-light hover:bg-light border-0 shadow-xl text-dark text-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
-                    </svg>
+                   class="btn btn-circle bg-gray hover:bg-light border-0 shadow-2xl text-dark text-lg">
+		    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-6 h-6"> <path fill-rule="evenodd" d="M2 8a.75.75 0 0 1 .75-.75h8.69L8.22 4.03a.75.75 0 0 1 1.06-1.06l4.5 4.5a.75.75 0 0 1 0 1.06l-4.5 4.5a.75.75 0 0 1-1.06-1.06l3.22-3.22H2.75A.75.75 0 0 1 2 8Z" clip-rule="evenodd" /> </svg>
                 </a>
             </div>
             <img class="aspect-auto min-h-full object-center object-cover" src="{{ imageLink }}">
         </div>
     </div>
-    <div class="m-3 mx-5">
-        <a class="hover:underline font-semibold font-serif mb-3 text-2xl text-dark" href="{{ siteLink }}">{{ nameChinese }}<br />{{ nameEnglish }}</a>
+    <div class="m-3 mx-5 mt-5">
+        <a class="hover:border-b-2 font-semibold font-serif text-2xl text-dark" href="{{ siteLink }}">
+	    <span class="font-sans">
+		{{ nameChinese }}
+	    </span>
+	    <br />
+	    {{ nameEnglish }}
+	</a>
+	<div class="mb-2"></div>
         <p class="font-serif text-xl text-dark">{{ location1 }}</p>
         <p class="font-serif italic text-xl text-dark">{{ location2 }}</p>
     </div>
