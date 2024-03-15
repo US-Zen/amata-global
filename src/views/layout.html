@@ -15,12 +15,19 @@
                 <a href="index.html"><img src="../images/Screenshot 2024-01-08 094916.png" class="text-left w-64"></a>
             </div>
         </div>
-        <nav class="flex mt-4 flow-row justify-items-center justify-between">
-            <a href="about.html" class="text-blue-500 hover:text-blue-800 mx-2">About</a>
-            <span>|</span>
-            <a href="dhammadipa.html" class="text-blue-500 hover:text-blue-800 mx-2">Master Dhammadipa</a>
-            <span>|</span>
-            <a href="contact.html" class="text-blue-500 hover:text-blue-800 mx-2">Contact</a>
+        <nav class="flex mt-6 flow-row justify-items-center justify-between text-lg font-sans">
+            <a href="about.html"
+	       class="text-blue-500 hover:text-blue-800 lg:mx-1 px-3 py-1 rounded-full hover:shadow border-2 border-light hover:border-dark hover:bg-gray">
+		About
+	    </a>
+            <a href="dhammadipa.html"
+	       class="text-blue-500 hover:text-blue-800 lg:mx-1 px-3 py-1 rounded-full hover:shadow border-2 border-light hover:border-dark hover:bg-gray">
+		Master Dhammadipa
+	    </a>
+            <a href="contact.html"
+	       class="text-blue-500 hover:text-blue-800 lg:mx-1 px-3 py-1 rounded-full hover:shadow border-2 border-light hover:border-dark hover:bg-gray">
+		Contact
+	    </a>
         </nav>
 
         <!-- block for specific page content -->
@@ -32,5 +39,17 @@
     <!-- block for specific page scripts -->
     {% block scripts %}{% endblock %}
 </body>
+<script>
+ let navElements = document.querySelectorAll('nav > a');
+
+ navElements.forEach((el) => {
+     if(document.URL.endsWith(el.href)) {
+	 el.classList.add("border-dark");
+	 el.classList.add("bg-gray");
+	 el.classList.add("shadow");
+	 el.classList.remove("border-light");
+     }
+ })
+</script>
 
 </html>
