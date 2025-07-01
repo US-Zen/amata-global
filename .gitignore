@@ -1,3 +1,4 @@
 _pgbackup/
 node_modules/
 dist/
+.idea/
